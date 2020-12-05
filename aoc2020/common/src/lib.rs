@@ -89,6 +89,15 @@ pub fn file_to_vec<T: FromStr>(file_name: &str) -> Vec<T> {
     .collect()
 }
 
+pub fn file_to_vec_split_at<T: FromStr>(file_name: &str, splitter: &str) -> Vec<T> {
+  read_to_string(file_name)
+    .expect("file not found")
+    .split(splitter)
+    .map(|x| x.parse())
+    .flatten()
+    .collect()
+}
+
 #[allow(dead_code)]
 fn main() {
   let lines = file_to_vec::<String>("input.txt");
